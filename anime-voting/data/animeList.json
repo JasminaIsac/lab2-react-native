@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Attack on Titan",
+    "description": "Umanitatea luptă pentru supraviețuire într-o lume dominată de titani uriași devoratori de oameni.",
+    "image": "https://cdn.myanimelist.net/images/anime/10/47347.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Death Note",
+    "description": "Un student genial găsește un caiet magic care ucide pe oricine îi este scris numele.",
+    "image": "https://cdn.myanimelist.net/images/anime/9/9453.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Demon Slayer: Kimetsu no Yaiba",
+    "description": "Tanjiro devine vânător de demoni după ce familia lui este masacrată și sora lui transformată în demon.",
+    "image": "https://cdn.myanimelist.net/images/anime/1286/99889.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Jujutsu Kaisen",
+    "description": "Un tânăr obține puteri malefice după ce înghite un deget blestemat și luptă alături de exorciști.",
+    "image": "https://cdn.myanimelist.net/images/anime/1171/109222.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Fullmetal Alchemist: Brotherhood",
+    "description": "Doi frați alchimiști caută Piatra Filozofală pentru a-și recăpăta trupurile pierdute.",
+    "image": "https://cdn.myanimelist.net/images/anime/1223/96541.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Naruto: Shippuden",
+    "description": "Naruto Uzumaki luptă pentru a deveni un ninja respectat și pentru a-și proteja prietenii.",
+    "image": "https://cdn.myanimelist.net/images/anime/5/17407.jpg"
+  },
+  {
+    "id": 7,
+    "name": "One Piece",
+    "description": "Monkey D. Luffy pleacă într-o aventură epică pentru a deveni Regele Piraților și a găsi comoara supremă.",
+    "image": "https://cdn.myanimelist.net/images/anime/6/73245.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Chainsaw Man",
+    "description": "Un tânăr vânător de demoni fuzionează cu câinele său-diavol și devine Chainsaw Man.",
+    "image": "https://cdn.myanimelist.net/images/anime/1806/126216.jpg"
+  },
+  {
+    "id": 9,
+    "name": "My Hero Academia",
+    "description": "Într-o lume plină de supereroi, un băiat fără puteri visează să devină cel mai mare erou.",
+    "image": "https://cdn.myanimelist.net/images/anime/10/78745.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Spy x Family",
+    "description": "Un spion, o asasină și o fetiță telepat formează o familie falsă într-o misiune secretă.",
+    "image": "https://cdn.myanimelist.net/images/anime/1441/122795.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Tokyo Ghoul",
+    "description": "După un accident, un student devine jumătate-ghoul și trebuie să învețe să trăiască între două lumi.",
+    "image": "https://cdn.myanimelist.net/images/anime/5/64449.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Black Clover",
+    "description": "Asta și Yuno, doi orfani, visează să devină Regele Vrăjitorilor într-o lume plină de magie.",
+    "image": "https://cdn.myanimelist.net/images/anime/2/88336l.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Bleach",
+    "description": "Ichigo Kurosaki dobândește puterile unui Shinigami și protejează lumea oamenilor de spirite malefice.",
+    "image": "https://cdn.myanimelist.net/images/anime/3/40451l.jpg"
+  },
+  {
+    "id": 14,
+    "name": "One Punch Man",
+    "description": "Saitama este un supererou care poate învinge orice adversar cu un singur pumn și caută o provocare adevărată.",
+    "image": "https://cdn.myanimelist.net/images/anime/12/76049.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Dragon Ball Super",
+    "description": "Goku și prietenii săi luptă împotriva unor adversari puternici din universuri diferite, într-o continuare a legendarului Dragon Ball Z.",
+    "image": "https://cdn.myanimelist.net/images/anime/7/74606.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Fairy Tail",
+    "description": "Guilda Fairy Tail și membrii săi pornesc în aventuri pline de magie, prietenie și lupte împotriva răului.",
+    "image": "https://cdn.myanimelist.net/images/anime/3/60551.jpg"
+  }
+]
