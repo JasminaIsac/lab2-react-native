@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import { useUser } from "../contexts/UserContext";
-import CustomButton from "../components/CustomButton";
+import { useUser } from "@contexts/UserContext";
+import CustomButton from "@components/CustomButton";
 
 export default function WelcomePage() {
   const router = useRouter();

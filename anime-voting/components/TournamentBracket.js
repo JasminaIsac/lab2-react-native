@@ -1,75 +1,82 @@
-// components/TournamentBracket.js
-import React from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import Minicard from "./mini-card";
 
-export default function TournamentBracket({ voteHistory, finalWinner, animeList }) {
-  // Construim rundele ca array de perechi
-  const buildRounds = () => {
-    let rounds = [];
-    let current = voteHistory.map(v => ({ ...v }));
-    while (current.length > 0) {
-      rounds.push(current);
-      current = current
-        .map(v => ({ options: [v.chosen], chosen: v.chosen }))
-        .filter(Boolean);
-      if (current.length <= 1) break;
-    }
-    return rounds;
-  };
+export default function TournamentBracket({ voteHistory, animeList }) {
 
-  const rounds = buildRounds();
+  const getAnimeById = (id) => animeList.find(a => a.id === id);
+
+  const rounds = voteHistory.reduce((acc, vote) => {
+    const r = vote.round;
+    if (!acc[r]) acc[r] = [];
+    acc[r].push(vote.chosenId);
+    return acc;
+  }, {});
+
+ const roundKeys = Object.keys(rounds);
 
   return (
-    <ScrollView horizontal contentContainerStyle={styles.scroll}>
-      {rounds.map((round, rIdx) => (
-        <View key={rIdx} style={styles.round}>
-          {round.map((item, iIdx) => {
-            const options = item.options.map(id => animeList.find(a => a.id === id));
-            const winner = animeList.find(a => a.id === item.chosen);
-            return (
-              <View key={iIdx} style={styles.box}>
-                <Text style={styles.optionText}>
-                {(options
-                    .filter(Boolean)
-                    .map(a => a.name)
-                    .join(" vs ")) || "N/A"}
-                </Text>
-                {winner && <Text style={styles.winnerText}>{winner.name}</Text>}
-              </View>
-            );
-          })}
-        </View>
-      ))}
+    <View style={styles.container}>
+      <Text style={styles.header}>Your choosing history:</Text>
 
-      {/* Final Winner */}
-      <View style={styles.finalBox}>
-        <Text style={styles.finalTitle}>Câștigător final</Text>
-        <Image source={{ uri: finalWinner.image }} style={styles.finalImage} />
-        <Text style={styles.finalName}>{finalWinner.name}</Text>
+      <View style={[styles.roundRow, { paddingHorizontal: 15 }]}>
+        {animeList.map((anime) => (
+          <Minicard key={anime.id} object={anime} size={20} margin={3} />
+        ))}
       </View>
-    </ScrollView>
+
+      {roundKeys.map((roundKey, rIdx) => {
+        const chosenIds = rounds[roundKey];
+        const size = 20 + (rIdx + 1) * 10;
+        const mh = 15 + (rIdx + 1) * 8 * (rIdx * 2);
+
+        return (
+          <View key={rIdx} style={{ width: "100%" }}>
+            <View style={styles.roundRow}>
+              {chosenIds.map((id, i) => {
+                const anime = getAnimeById(id);
+                if (!anime) return null;
+                return (
+                  <View key={i} style={{ flexDirection: "column", alignItems: "center"}}>
+                    <Text style={[styles.connector, { fontSize: 20 + (rIdx * 20), lineHeight: 20 + (rIdx * 10) }]}>︸</Text>
+                    <Minicard object={anime} size={size} margin={mh} />
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+        );
+      })}
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  scroll: { paddingVertical: 20, alignItems: "center" },
-  round: { marginHorizontal: 20, alignItems: "center" },
-  box: {
-    width: 120,
-    height: 60,
-    backgroundColor: "#F5F5FA",
-    borderColor: "#6E3EE6",
-    borderWidth: 1,
-    borderRadius: 10,
-    justifyContent: "center",
+export const styles = StyleSheet.create({
+  container: {
     alignItems: "center",
-    marginVertical: 10,
-    padding: 5,
+    paddingHorizontal: 10,
+    marginVertical: 20,
   },
-  optionText: { fontSize: 12, textAlign: "center", color: "#6A6887" },
-  winnerText: { fontWeight: "bold", fontSize: 14, color: "#6E3EE6", marginTop: 4, textAlign: "center" },
-  finalBox: { marginLeft: 30, alignItems: "center" },
-  finalTitle: { fontSize: 16, fontWeight: "bold", marginBottom: 10, color: "#6E3EE6" },
-  finalImage: { width: 120, height: 180, borderRadius: 10 },
-  finalName: { fontSize: 16, fontWeight: "bold", marginTop: 5, color: "#6E3EE6", textAlign: "center" },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: "#6E3EE6",
+  },
+  roundRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    paddingHorizontal: 10
+  },
+  roundTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  connector: {
+    fontSize: 20,
+    marginTop: 10,
+    color: "#555",
+    marginBottom: -5,
+  },
 });

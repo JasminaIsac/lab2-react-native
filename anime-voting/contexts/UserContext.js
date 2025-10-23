@@ -1,45 +1,4 @@
-// import React, { createContext, useContext, useState } from "react";
-
-// const UserContext = createContext();
-
-// export const UserProvider = ({ children }) => {
-//   const [username, setUsername] = useState("");
-//   const [voteHistory, setVoteHistory] = useState([]);
-//   // const [finalWinner, setFinalWinner] = useState(null);
-
-// const addVoteToHistory = (voteRecord) => {
-//     setVoteHistory(prev => ({
-//       ...prev, voteRecord
-//     }));
-//   };
-
-//   const resetUserData = () => {
-//     setUsername("");
-//     setVoteHistory([]);
-//     // setFinalWinner(null);
-//   };
-
-//   return (
-//     <UserContext.Provider
-//       value={{
-//         username,
-//         setUsername,
-//         voteHistory,
-//         addVoteToHistory,
-//         // finalWinner,
-//         // setFinalWinner,
-//         resetUserData,
-//       }}
-//     >
-//       {children}
-//     </UserContext.Provider>
-//   );
-// };
-
-// export const useUser = () => useContext(UserContext);
-
-
-import React, { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const UserContext = createContext();
@@ -52,23 +11,12 @@ export const UserProvider = ({ children }) => {
     votingDate: null
   });
 
-  const addVoteToHistory = (voteRecord) => {
-    setUser(prev => ({
-      ...prev,
-      votingHistory: [...prev.votingHistory, voteRecord]
-    }));
-  };
-
   const updateHistory = (newHistory) => {
     setUser(prev => ({ ...prev, votingHistory: newHistory }));
   };
 
   const updateUser = (prop) => {
     setUser(prev => ({ ...prev, ...prop }));
-  };
-
-  const clearHistory = () => {
-    setUser(prev => ({ ...prev, votingHistory: [] }));
   };
 
   const resetUserData = () => {
@@ -80,36 +28,32 @@ export const UserProvider = ({ children }) => {
 
   const saveUserData = async () => {
     try {
-      // 1️⃣ Citește array-ul existent
+      const userToSave = {
+        username: user.username,
+        winner: user.winner,
+        votingDate: user.votingDate,
+      };
       const existing = await AsyncStorage.getItem('users');
       let users = existing ? JSON.parse(existing) : [];
 
-      // 2️⃣ Verifică dacă userul există deja
       const index = users.findIndex(u => u.username === user.username);
 
       if (index !== -1) {
-        // 3️⃣ Dacă există — actualizează userul
-        users[index] = user;
+        users[index] = userToSave;
       } else {
-        // 4️⃣ Dacă nu există — adaugă noul user
-        users.push(user);
+        users.push(userToSave);
       }
 
-      // 5️⃣ Salvează array-ul actualizat
       await AsyncStorage.setItem('users', JSON.stringify(users));
-
-      console.log('User list updated successfully!');
     } catch (error) {
       console.error('Error saving users:', error);
     }
   };
 
   const value = {
-    user,                    // obiectul user cu username și votingHistory
-    addVoteToHistory,        // funcții
-    updateUser,          // funcții  
-    clearHistory,            // funcții
-    resetUserData,           // funcții
+    user,
+    updateUser,
+    resetUserData,
     updateHistory,
     saveUserData
   };
