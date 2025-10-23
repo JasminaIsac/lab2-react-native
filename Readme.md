@@ -1,5 +1,5 @@
 # Aplicație de Clasament cu Componente de Bază
-![](lab-example.gif)
+![](screenshot.png)
 ## Descriere Proiect
 Această aplicație permite utilizatorilor să participe la un sistem de clasament, alegând preferințele dintre obiecte (anime-uri în exemplu). Aplicația înregistrează alegerile și afișează rezultatul final, împreună cu istoricul selecțiilor fiecărui utilizator.
 ### Tehnologii și Configurare
