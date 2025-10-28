@@ -11,9 +11,10 @@ export default function WelcomePage() {
 
   const handleClick = () => {
     if (!input.trim()) return;
-      resetUserData();
-      updateUser({username: input.trim()});
-      router.push("/voting");
+
+    resetUserData();
+    updateUser({username: input.trim()});
+    router.push("/voting");
   };
 
     return (

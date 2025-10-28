@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import animeList from '@data/animeList.json';
@@ -15,29 +15,31 @@ export default function ResultsPage() {
 
   useEffect(() => {
     const saveAndFetch = async () => {
-      await saveUserData(); 
+      try{
+        await saveUserData();
 
-      const data = await AsyncStorage.getItem('users');
-      const users = data ? JSON.parse(data) : [];
-      const votes = users.map(u => ({
-        username: u.username,
-        winner: u.winner,
-        votingDate: u.votingDate,
-      }));
-      setAllUsersVote(votes);
+        const data = await AsyncStorage.getItem('users');
+        const users = data ? JSON.parse(data) : [];
+        const votes = users.map(u => ({
+          username: u.username,
+          winner: u.winner,
+          votingDate: u.votingDate,
+        }));
+        setAllUsersVote(votes);
+      } catch (error) {
+        console.error("Error saving or fetching data", error);
+      }
     };
-
     saveAndFetch();
   }, []);
 
-
   const votingHistory = user.votingHistory;
 
-  const findWinner = () => {
+  const findWinner = useCallback(() => {
     if (votingHistory.length === 0) return null;
     const lastVote = votingHistory[votingHistory.length - 1];
     return animeList.find(anime => anime.id === lastVote.chosenId);
-  };
+  }, [votingHistory, animeList]);
 
   const winner = findWinner();
 

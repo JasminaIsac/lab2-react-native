@@ -1,30 +1,39 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useReducer, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const userReducer = (state, action) => {
+  switch (action.type) {
+    case 'UPDATE_USER':
+      return { ...state, ...action.payload };
+    case 'UPDATE_HISTORY':
+      return { ...state, votingHistory: action.payload };
+    case 'RESET_USER':
+      return {
+        username: 'User',
+        votingHistory: [],
+        winner: null,
+        votingDate: null,
+      };
+    default:
+      return state;
+  }
+};
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    username: 'Utilizator',
+  const initialState = {
+    username: 'User',
     votingHistory: [],
     winner: null,
-    votingDate: null
-  });
-
-  const updateHistory = (newHistory) => {
-    setUser(prev => ({ ...prev, votingHistory: newHistory }));
+    votingDate: null,
   };
 
-  const updateUser = (prop) => {
-    setUser(prev => ({ ...prev, ...prop }));
-  };
+  const [user, dispatch] = useReducer(userReducer, initialState);
 
-  const resetUserData = () => {
-    setUser({
-      username: 'Utilizator',
-      votingHistory: [],
-    });
-  };
+  const updateUser = (prop) => dispatch({ type: 'UPDATE_USER', payload: prop });
+  const updateHistory = (newHistory) => dispatch({ type: 'UPDATE_HISTORY', payload: newHistory });
+  const resetUserData = () => dispatch({ type: 'RESET_USER' });
 
   const saveUserData = async () => {
     try {
